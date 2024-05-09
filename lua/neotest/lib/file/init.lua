@@ -91,7 +91,7 @@ function neotest.lib.files.split_lines(data_iterator)
     end
   end)
 
-  return queue.get
+  return queue.
 end
 
 --- Streams data from a file, watching for new data over time
@@ -243,7 +243,10 @@ local memoized_detect = fu.memoize(filetype.detect)
 ---@param path string
 ---@return string
 function neotest.lib.files.detect_filetype(path)
-  return memoized_detect(path)
+    -- FIXME: debug revert once we figure this out
+    logger.debug("Detecting filetype for: >>" .. path .."<<" )
+    return filetype.detect(path)
+    --  return memoized_detect(path)
 end
 
 --- Parse a sorted list of file paths into a position tree
