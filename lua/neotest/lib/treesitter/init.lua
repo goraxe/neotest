@@ -116,6 +116,8 @@ function neotest.lib.treesitter.get_parse_root(file_path, content, opts)
   local ft = lib.files.detect_filetype(file_path)
   local lang = vim.treesitter.language.get_lang(ft) or ft
   nio.scheduler()
+
+  logger.trace("get_parse_root: file_path = %s, ft = %s, lang = %s", file_path, ft, lang)
   local lang_tree = vim.treesitter.get_string_parser(
     content,
     lang,
