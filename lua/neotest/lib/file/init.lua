@@ -363,10 +363,12 @@ function neotest.lib.files.match_root_pattern(opts, ...)
     else
         patterns = vim.tbl_flatten({ ... })
     end
+    -- preserve default behaviour
     local filter = opts.filter or function(_) return true end
     local return_table = opts.return_table or false
+    local check_parents = opts.check_parents or true
     return function(start_path)
-        local start_parents = Path:new(start_path):parents()
+        local start_parents = (check_parents == true and Path:new(start_path):parents() or Path:new(start_path))
         local home = os.getenv("HOME")
         local potential_roots = neotest.lib.files.is_dir(start_path)
             and vim.list_extend({ start_path }, start_parents)
