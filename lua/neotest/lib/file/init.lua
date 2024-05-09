@@ -369,11 +369,14 @@ function neotest.lib.files.match_root_pattern(opts, ...)
     local return_table = opts.return_table or false
     local check_parents = true
     if opts.check_parents then
+        logger.trace("checking parents: " .. vim.inspect(opts.check_parents))
         check_parents = opts.check_parents
+    else
+        logger.trace("checking parents: " .. check_parents)
     end
     return function(start_path)
-        logger.trace("checking parents: " .. ( check_parents and "true (" .. vim.inspect(Path:new(start_path):parents()) .. ")" or "false (" .. vim.inspect(Path:new(start_path)) .. ")" ))
-        local start_parents = (check_parents == true and Path:new(start_path):parents() or Path:new(start_path))
+        logger.trace("checking parents: " .. ( (check_parents == true) and "true (" .. vim.inspect(Path:new(start_path):parents()) .. ")" or "false (" .. vim.inspect(Path:new(start_path)) .. ")" ))
+        local start_parents = ((check_parents == true) and Path:new(start_path):parents() or Path:new(start_path))
         local home = os.getenv("HOME")
         logger.trace("starting parents: " .. vim.inspect(start_parents))
         local potential_roots = neotest.lib.files.is_dir(start_path)
