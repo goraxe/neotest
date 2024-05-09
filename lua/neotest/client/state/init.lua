@@ -63,6 +63,7 @@ function NeotestClientState:update_positions(adapter_id, tree)
     self._positions[adapter_id] = lib.positions.merge(self._positions[adapter_id], tree)
   end
   self._events:emit(NeotestEvents.DISCOVER_POSITIONS, adapter_id, tree)
+  logger.trace("leaving update_positions")
 end
 
 ---@param results table<string, neotest.Result>

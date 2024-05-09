@@ -311,6 +311,7 @@ function neotest.Client:_update_positions(path, args)
   end, function(msg)
     logger.error("Couldn't find positions in path", path, debug.traceback(msg, 2))
   end)
+  logger.trace("Finished updating positions for" .. path)
 end
 
 ---@private

@@ -174,6 +174,7 @@ end
 ---@param opts neotest.lib.treesitter.ParseOptions
 ---@return neotest.Tree
 function neotest.lib.treesitter.parse_positions(file_path, query, opts)
+  logger.trace("treesitter Parsing file " .. file_path)
   opts = opts or {}
   if child_failed or not lib.subprocess.enabled() then
     return neotest.lib.treesitter._parse_positions(file_path, query, opts)
