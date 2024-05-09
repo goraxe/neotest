@@ -368,11 +368,11 @@ function neotest.lib.files.match_root_pattern(opts, ...)
     local filter = opts.filter or function(_) return true end
     local return_table = opts.return_table or false
     local check_parents = true
-    if opts.check_parents then
+    if opts.check_parents == nil then
+        logger.trace("checking parents: " .. vim.inspect(check_parents))
+    else
         logger.trace("checking parents: " .. vim.inspect(opts.check_parents))
         check_parents = opts.check_parents
-    else
-        logger.trace("checking parents: " .. check_parents)
     end
     return function(start_path)
         logger.trace("checking parents: " .. ( (check_parents == true) and "true (" .. vim.inspect(Path:new(start_path):parents()) .. ")" or "false (" .. vim.inspect(Path:new(start_path)) .. ")" ))
