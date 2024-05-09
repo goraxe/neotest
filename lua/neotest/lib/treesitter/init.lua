@@ -117,7 +117,7 @@ function neotest.lib.treesitter.get_parse_root(file_path, content, opts)
   local lang = vim.treesitter.language.get_lang(ft) or ft
   nio.scheduler()
 
-  logger.trace("get_parse_root: file_path = %s, ft = %s, lang = %s", file_path, ft, lang)
+  logger.trace("get_parse_root: file_path = " .. file_path .. ", ft = " .. ft .. ", lang = " .. lang)
   local lang_tree = vim.treesitter.get_string_parser(
     content,
     lang,
@@ -125,6 +125,7 @@ function neotest.lib.treesitter.get_parse_root(file_path, content, opts)
     --- it from trying to read the query from runtime files
     fast and { injections = { [lang] = "" } } or {}
   )
+   logger.trace("we got a lang_tree " .. vim.inspect(lang_tree))
   local root
   if fast then
     root = neotest.lib.treesitter.fast_parse(lang_tree):root()
