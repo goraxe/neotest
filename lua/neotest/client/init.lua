@@ -528,7 +528,9 @@ function neotest.Client:_update_adapters(dir)
   for adapter_id, _ in pairs(self._adapters) do
     found[adapter_id] = true
   end
+  logger.trace("found: " .. vim.inspect(found))
   for _, entry in ipairs(adapters_with_root) do
+    logger.trace("checking entry: " .. vim.inspect(entry))
     local adapter = entry.adapter
     local root = entry.root
     -- What are we doing here?
