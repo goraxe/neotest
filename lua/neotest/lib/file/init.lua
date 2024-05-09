@@ -361,6 +361,7 @@ function neotest.lib.files.match_root_pattern(opts, ...)
     if type(opts) ~= "table" then
         patterns = vim.tbl_flatten({ opts, ... })
     else
+        logger.trace("called with opts: ", vim.inspect(opts))
         patterns = vim.tbl_flatten({ ... })
     end
     -- preserve default behaviour
@@ -370,6 +371,7 @@ function neotest.lib.files.match_root_pattern(opts, ...)
     return function(start_path)
         local start_parents = (check_parents == true and Path:new(start_path):parents() or Path:new(start_path))
         local home = os.getenv("HOME")
+        logger.trace("starting parents: " .. vim.inspect(start_parents))
         local potential_roots = neotest.lib.files.is_dir(start_path)
             and vim.list_extend({ start_path }, start_parents)
             or start_parents
@@ -380,6 +382,7 @@ function neotest.lib.files.match_root_pattern(opts, ...)
             end
             valid_roots[index] = value
         end
+        logger.trace("valid roots: " .. vim.inspect(valid_roots))
         local ret = {}
         for _, path in ipairs(valid_roots) do
             for _, pattern in ipairs(patterns) do
