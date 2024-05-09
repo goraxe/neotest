@@ -160,7 +160,7 @@ function neotest.lib.subprocess._remote_call(func, cb_id, args)
         { cb_id, res }
       )
     end, function(msg)
-      local err = debug.traceback(msg, 6)
+      local err = debug.traceback(msg, 1)
       logger.warn("Error in remote call", err)
       neotest.lib.subprocess.notify(
         "nvim_exec_lua",
