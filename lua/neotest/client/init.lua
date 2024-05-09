@@ -307,6 +307,7 @@ function neotest.Client:_update_positions(path, args)
       logger.debug("Found", positions)
       self._state:update_positions(adapter_id, positions)
     end
+    logger.trace("Finished updating positions for" .. path)
   end, function(msg)
     logger.error("Couldn't find positions in path", path, debug.traceback(msg, 2))
   end)
@@ -542,7 +543,9 @@ function neotest.Client:_update_adapters(dir)
       self._adapters[adapter_id] = adapter
       found[adapter_id] = true
       if config.projects[root].discovery.enabled then
+        logger.trace("calling _update_positions for adapter: " ..  adapter_id)
         self:_update_positions(root, { adapter = adapter_id })
+        logger.trace("done _update_positions for adapter: " ..  adapter_id)
       else
         self:_update_open_buf_positions(adapter_id)
       end
