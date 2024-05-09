@@ -150,7 +150,7 @@ end
 
 ---@private
 function neotest.lib.subprocess._remote_call(func, cb_id, args)
-  logger.info("Received remote call", cb_id, func)
+  logger.info("Received remote call", cb_id, func, vim.inspect(args))
   nio.run(function()
     xpcall(function()
       local res = func(unpack(args))
@@ -160,7 +160,7 @@ function neotest.lib.subprocess._remote_call(func, cb_id, args)
         { cb_id, res }
       )
     end, function(msg)
-      local err = debug.traceback(msg, 2)
+      local err = debug.traceback(msg, 6)
       logger.warn("Error in remote call", err)
       neotest.lib.subprocess.notify(
         "nvim_exec_lua",
