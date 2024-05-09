@@ -244,7 +244,7 @@ local memoized_detect = fu.memoize(filetype.detect)
 ---@return string
 function neotest.lib.files.detect_filetype(path)
     -- FIXME: debug revert once we figure this out
-    logger.debug("Detecting filetype for: >>" .. path .."<<" )
+    --logger.debug("Detecting filetype for: >>" .. path .."<<" )
     return filetype.detect(path)
     --  return memoized_detect(path)
 end
