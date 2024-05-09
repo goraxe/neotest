@@ -91,7 +91,7 @@ function neotest.lib.files.split_lines(data_iterator)
     end
   end)
 
-  return queue.
+  return queue.get
 end
 
 --- Streams data from a file, watching for new data over time
