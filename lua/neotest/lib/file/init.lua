@@ -245,8 +245,8 @@ local memoized_detect = fu.memoize(filetype.detect)
 function neotest.lib.files.detect_filetype(path)
     -- FIXME: debug revert once we figure this out
     --logger.debug("Detecting filetype for: >>" .. path .."<<" )
-    return filetype.detect(path)
-    --  return memoized_detect(path)
+   -- return filetype.detect(path)
+   return memoized_detect(path)
 end
 
 --- Parse a sorted list of file paths into a position tree

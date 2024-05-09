@@ -1,4 +1,5 @@
 --- Memoize function from https://github.com/kikito/memoize.lua
+local logger = require("neotest.logging")
 
 local function is_callable(f)
   local tf = type(f)
@@ -51,10 +52,14 @@ return function(f, cache)
   return function(...)
     local params = { ... }
 
+    logger.trace("Memoize: ", vim.inspect(params))
     local results = cache_get(cache, params)
     if not results then
       results = { f(...) }
+      logger.trace("cache_miss: ", vim.inspect(results))
       cache_put(cache, params, results)
+    else
+      logger.trace("cache_hit: " , vim.inspect(params))
     end
 
     return unpack(results)

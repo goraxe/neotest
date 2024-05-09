@@ -118,7 +118,6 @@ function neotest.lib.func_util.partial(func, ...)
   end
 end
 
----@private
 ---@generic F
 ---@type fun(f: F): F
 neotest.lib.func_util.memoize = require("neotest.lib.func_util.memoize")
