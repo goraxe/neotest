@@ -77,10 +77,13 @@ function AdapterGroup:_path_adapters(path)
     path = path:sub(1, -2)
   end
   for root, project_config in pairs(config.projects) do
+    logger.trace("Checking root " .. root .. " with config " .. vim.inspect(project_config))
+    -- FIXME: I have a feeling this will only ever return one match 
     if root == path or vim.startswith(path, root .. lib.files.sep) then
       return project_config.adapters
     end
   end
+  logger.trace("No adapters found for path " .. path .. " returning " .. vim.inspect(config.adapters))
   return config.adapters
 end
 
