@@ -8,6 +8,7 @@ local lib = require("neotest.lib")
 local AdapterGroup = {}
 
 function AdapterGroup:adapters_with_root_dir(cwd)
+  logger.debug("Finding adapters for directory", cwd)
   local adapters = {}
   for _, adapter in ipairs(self:_path_adapters(cwd)) do
     local root = adapter.root(cwd)
