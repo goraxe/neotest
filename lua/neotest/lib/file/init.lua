@@ -370,7 +370,9 @@ function neotest.lib.files.match_root_pattern(...)
     end
     for _, path in ipairs(valid_roots) do
       for _, pattern in ipairs(patterns) do
+        logger.trace("attempting pattern of  " .. pattern .. " in " .. path)
         for _, p in ipairs(nio.fn.glob(Path:new(path, pattern).filename, true, true)) do
+          logger.trace("testing existence of " .. p)
           if neotest.lib.files.exists(p) then
             return path
           end
