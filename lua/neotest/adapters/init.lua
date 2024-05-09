@@ -60,6 +60,7 @@ end
 
 function AdapterGroup:adapter_matching_path(path)
   for _, adapter in ipairs(self:_path_adapters(path)) do
+    logger.trace("Adapter" .. adapter.name .. "checking path" .. path)
     if adapter.is_test_file(path) then
       logger.info("Adapter", adapter.name, "matched path", path)
       return adapter
