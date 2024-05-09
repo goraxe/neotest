@@ -252,6 +252,7 @@ end
 ---@param path string
 ---@private
 function neotest.Client:_update_positions(path, args)
+  logger.trace("Updating positions for " .. path)
   if not lib.files.exists(path) then
     return
   end
@@ -259,6 +260,7 @@ function neotest.Client:_update_positions(path, args)
   args = args or {}
   local adapter_id, adapter = self:_get_adapter(path, args.adapter)
   if not adapter then
+    logger.info("No adapter found for " .. adapter_id)
     return
   end
   xpcall(function()
@@ -276,7 +278,7 @@ function neotest.Client:_update_positions(path, args)
           return
         end
       end
-      logger.info("Searching", path, "for test files")
+      logger.info("Searching", path, "for test files for adapter: " .. adapter_id)
       local root_path = existing_root and existing_root:data().path or path
       local files = lib.func_util.filter_list(
         adapter.is_test_file,
@@ -529,8 +531,12 @@ function neotest.Client:_update_adapters(dir)
   for _, entry in ipairs(adapters_with_root) do
     local adapter = entry.adapter
     local root = entry.root
+    -- What are we doing here?
+    -- construct adapter_id and check if it exists
     local adapter_id = ("%s:%s"):format(adapter.name, root)
     if not found[adapter_id] then
+      logger.info("Adding adapter", adapter_id)
+      -- construct it and add it to the list
       self._adapters[adapter_id] = adapter
       found[adapter_id] = true
       if config.projects[root].discovery.enabled then
