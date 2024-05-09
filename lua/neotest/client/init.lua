@@ -529,7 +529,7 @@ function neotest.Client:_update_adapters(dir)
     found[adapter_id] = true
   end
   logger.trace("found: " .. vim.inspect(found) .. "adapters_with_root: " .. vim.inspect(adapters_with_root).. "adapters_with_bufs: " .. vim.inspect(adapters_with_bufs))
-  for _, entry in ipairs(adapters_with_root) do
+  for _, entry in pairs(adapters_with_root) do
     logger.trace("checking entry: " .. vim.inspect(entry))
     local adapter = entry.adapter
     local root = entry.root
@@ -548,6 +548,7 @@ function neotest.Client:_update_adapters(dir)
       end
     end
   end
+  logger.trace("leaving entries loop")
   local root = lib.files.is_dir(dir) and dir or vim.loop.cwd()
   for _, adapter in ipairs(adapters_with_bufs) do
     local adapter_id = ("%s:%s"):format(adapter.name, root)
