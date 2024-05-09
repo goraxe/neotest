@@ -439,6 +439,7 @@ function NeotestConfigModule.setup(config)
     end,
   })
   for project_root, project_config in pairs(config.projects or {}) do
+    logger.trace("setting up project " .. project_root .. " with config " .. vim.inspect(project_config))
     NeotestConfigModule.setup_project(project_root, project_config)
   end
 

@@ -71,6 +71,8 @@ end
 
 ---@param path string
 function AdapterGroup:_path_adapters(path)
+  logger.trace("Finding adapters for path" .. path)
+  logger.debug("config.projects: " .. vim.inspect(config.projects))
   if vim.endswith(path, lib.files.sep) then
     path = path:sub(1, -2)
   end
