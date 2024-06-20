@@ -4,6 +4,7 @@ local nio = require("nio")
 local filetype = require("plenary.filetype")
 local fu = require("neotest.lib.func_util")
 local types = require("neotest.types")
+local utils = require("neotest.utils")
 local Tree = types.Tree
 
 local neotest = { lib = {} }
@@ -359,10 +360,10 @@ end
 function neotest.lib.files.match_root_pattern(opts, ...)
     local patterns
     if type(opts) ~= "table" then
-        patterns = vim.tbl_flatten({ opts, ... })
+        patterns = utils.tbl_flatten({ opts, ... })
     else
         logger.trace("called with opts: ", vim.inspect(opts))
-        patterns = vim.tbl_flatten({ ... })
+        patterns = utils.tbl_flatten({ ... })
     end
     -- preserve default behaviour
     local filter = opts.filter or function(_) return true end
